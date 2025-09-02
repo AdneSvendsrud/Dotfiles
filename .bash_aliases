@@ -6,9 +6,11 @@ alias gap='git add --patch'
 alias gb='git branch'
 alias gc='git commit'
 alias gcl='git clone'
-gcm() { git commit --message '$*' }
+gcm() { git commit --message "$*"; }
 alias gp='git push'
 alias gs='git status'
 alias gu='git pull'
 
-alias please='sudo $(history -p !!)'
+please() {
+  sudo "$(fc -ln -1)"
+}
