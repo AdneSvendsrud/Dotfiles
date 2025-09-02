@@ -9,6 +9,9 @@
 [core]
   autocrlf = true
 
+[init]
+  defaultBranch = main
+
 [diff]
   renames = copies  # detect copies as renames in diffs
 
