@@ -1,14 +1,14 @@
-alias cls="clear -x"
-alias clip="clip.exe"
+alias cls='clear -x'
+alias clip='clip.exe'
 
-alias ga="git add"
-alias gap="git add --patch"
-alias gb="git branch"
-alias gc="git commit"
-alias gcl="git clone"
-gcm() { git commit --message "$*" }
-alias gp="git push"
-alias gs="git status"
-alias gu="git pull"
+alias ga='git add'
+alias gap='git add --patch'
+alias gb='git branch'
+alias gc='git commit'
+alias gcl='git clone'
+gcm() { git commit --message '$*' }
+alias gp='git push'
+alias gs='git status'
+alias gu='git pull'
 
-alias please="sudo !!"
+alias please='sudo $(history -p !!)'
