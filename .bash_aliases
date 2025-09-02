@@ -11,3 +11,4 @@ alias gp="git push"
 alias gs="git status"
 alias gu="git pull"
 
+alias please="sudo !!"
