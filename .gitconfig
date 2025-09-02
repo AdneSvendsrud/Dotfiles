@@ -13,6 +13,7 @@
   defaultBranch = main
 
 [diff]
+  context = 3  # Less context for diffs
   renames = copies  # detect copies as renames in diffs
 
 [push]
