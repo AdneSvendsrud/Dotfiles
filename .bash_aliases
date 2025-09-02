@@ -12,5 +12,5 @@ alias gs='git status'
 alias gu='git pull'
 
 please() {
-  sudo "$(fc -ln -1)"
+  sudo $(history -p !!)
 }
