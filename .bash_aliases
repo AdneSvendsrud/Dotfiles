@@ -11,6 +11,3 @@ alias gp="git push"
 alias gs="git status"
 alias gu="git pull"
 
-HISTSIZE=10000
-SAVEHIST="$HISTSIZE"
-
