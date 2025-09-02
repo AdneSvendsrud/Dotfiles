@@ -23,6 +23,10 @@
   rebase = true
   default = current
 
+[rebase]
+  autoStash = true
+  missingCommitsCheck = warn # warn if rebasing with missing commits
+
 # URL shortcuts
 [url "git@github.com:bekk/"]
   insteadOf = "bekk:"
