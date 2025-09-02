@@ -1,0 +1,28 @@
+[user]
+  name = Ådne Tøftum Svendsrud
+  email = adne.svendsrud@bekk.no
+  signingkey = 
+
+[commit]
+  gpgSign = true
+
+[core]
+  autocrlf = true
+
+[diff]
+  renames = copies  # detect copies as renames in diffs
+
+[push]
+  default = current
+  followTags = true
+
+[pull]
+  rebase = true
+  default = current
+
+# URL shortcuts
+[url "git@github.com:bekk/"]
+  insteadOf = "bekk:"
+
+[url "git@github.com:kartverket/"]
+  insteadOf = "kv:"
