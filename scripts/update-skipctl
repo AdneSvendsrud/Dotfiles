@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# === USER CONFIGURATION ===
+OWNER="kartverket"
+REPO="skipctl"
+BINARY_NAME="skipctl"       # The name of the binary inside the archive
+FILE_PREFIX="skipctl_linux"             # The filename prefix used for binaries (e.g., "tool-linux-amd64.tar.gz")
+
+INSTALL_DIR="/usr/local/bin"
+
+# === Detect system architecture ===
+ARCH=$(uname -m)
+case "$ARCH" in
+    x86_64) ARCH="x86_64" ;;
+    aarch64 | arm64) ARCH="arm64" ;;
+    *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
+esac
+
+# === Get latest release version from GitHub API ===
+echo "Fetching latest release info..."
+API_URL="https://api.github.com/repos/$OWNER/$REPO/releases/latest"
+RELEASE_INFO=$(curl -sL $API_URL)
+
+TAG_NAME=$(echo "$RELEASE_INFO" | grep '"tag_name":' | head -n1 | cut -d '"' -f4)
+if [ -z "$TAG_NAME" ]; then
+    echo "Could not fetch release version."
+    exit 1
+fi
+
+# === Build download URL ===
+FILENAME="${FILE_PREFIX}_${ARCH}.tar.gz"
+DOWNLOAD_URL="https://github.com/$OWNER/$REPO/releases/download/${TAG_NAME}/${FILENAME}"
+
+echo "Latest version: $TAG_NAME"
+echo "Downloading: $FILENAME"
+
+# === Download the archive ===
+curl -LO "$DOWNLOAD_URL" || { echo "Download failed."; exit 1; }
+
+# === Extract and install ===
+tar -xf "$FILENAME" || { echo "Extraction failed."; exit 1; }
+
+if [ ! -f "$BINARY_NAME" ]; then
+    echo "Expected binary '$BINARY_NAME' not found after extraction."
+    exit 1
+fi
+
+chmod +x "$BINARY_NAME"
+sudo mv "$BINARY_NAME" "$INSTALL_DIR"
+
+# === Clean up ===
+rm "$FILENAME" readme.md server.md
+
+echo "✅ Installed $BINARY_NAME to $INSTALL_DIR"
+"$INSTALL_DIR/$BINARY_NAME" --version
+
